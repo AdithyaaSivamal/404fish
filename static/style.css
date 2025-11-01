@@ -1,0 +1,332 @@
+/* General page styling */
+:root {
+    --bg-color: #212529;
+    --bg-color-light: #2c3034;
+    --bg-color-darker: #1a1d20;
+    --text-color: #f8f9fa;
+    --text-color-muted: #adb5bd;
+    --border-color: #495057;
+    --accent-color: #3498db;
+    --accent-color-hover: #5dade2;
+    --red-ip: #e74c3c;
+    --orange-suspicious: #e67e22;
+    --green-location: #2ecc71;
+    --blue-port: #5dade2;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: var(--bg-color-light);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 10;
+    position: relative;
+}
+
+header h1 {
+    margin: 0.2em 0;
+    color: var(--text-color);
+    font-size: 1.8em;
+}
+
+header p {
+    margin: 0;
+    font-style: italic;
+    color: var(--text-color-muted);
+}
+
+.about-button {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.about-button:hover {
+    background-color: var(--accent-color-hover);
+}
+
+main {
+    padding: 15px;
+}
+
+/* Section 1: Map + Drilldown */
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    height: 75vh; 
+    margin-bottom: 15px;
+}
+
+#map-container {
+    flex: 3;
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    z-index: 1;
+    background-color: #333; /* Darker background for map tiles */
+}
+
+/* Leaflet dark theme for tiles */
+.leaflet-tile-pane {
+    filter: brightness(0.7) invert(1) contrast(0.9) hue-rotate(200deg) saturate(0.3);
+}
+
+/* Section 2: Flagged + Live Logs */
+.logs-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.log-column {
+    flex: 1;
+    background-color: var(--bg-color-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 500px;
+}
+
+.log-column h3 {
+    text-align: center;
+    font-size: 1.1em;
+    margin: 0;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    background-color: var(--bg-color-darker);
+    border-radius: 8px 8px 0 0;
+}
+
+.log-feed {
+    overflow-y: auto;
+    flex-grow: 1;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+    padding: 15px;
+    list-style-type: none;
+    margin: 0;
+}
+
+.log-feed li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.log-feed li:hover {
+    background-color: var(--bg-color);
+}
+
+.log-feed li:last-child {
+    border-bottom: none;
+}
+
+.log-time {
+    color: var(--text-color-muted);
+    font-size: 0.9em;
+    display: block;
+}
+
+.log-ip {
+    color: var(--red-ip);
+    font-weight: bold;
+}
+
+.log-port {
+    color: var(--blue-port);
+}
+
+.log-location {
+    color: var(--green-location);
+    font-style: italic;
+}
+
+.log-location-unknown {
+    color: var(--text-color-muted);
+    font-style: italic;
+}
+
+.log-detail {
+    color: var(--text-color);
+}
+.log-detail-isp {
+    color: var(--text-color-muted);
+}
+
+.log-suspicious {
+    font-weight: bold;
+    color: var(--orange-suspicious);
+}
+
+/* --- Context Menu --- */
+.context-menu {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-color-darker);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 220px;
+}
+
+.context-menu-item {
+    padding: 10px 15px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.context-menu-item:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+.context-menu-item:first-child {
+    border-radius: 5px 5px 0 0;
+}
+.context-menu-item:last-child {
+    border-radius: 0 0 5px 5px;
+}
+.context-menu-item + .context-menu-item {
+    border-top: 1px solid var(--border-color);
+}
+
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    width: 90%;
+    max-width: 600px;
+    padding: 25px;
+    line-height: 1.6;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--text-color-muted);
+    font-size: 2.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.modal-close:hover {
+    color: var(--text-color);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+}
+
+.modal-content li {
+    margin-bottom: 10px;
+}
+
+.modal-content a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.modal-content a:hover {
+    color: var(--accent-color-hover);
+    text-decoration: underline;
+}
+
+.modal-visible {
+    display: block;
+}
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    body {
+        height: auto; 
+        overflow-y: auto;
+    }
+    
+    .dashboard-container,
+    .logs-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #map-container {
+        height: 60vh;
+    }
+
+    .log-column {
+        height: 60vh;
+    }
+
+    .about-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    header h1 {
+        font-size: 1.4em;
+    }
+    header p {
+        font-size: 0.9em;
+    }
+}
