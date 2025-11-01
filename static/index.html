@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Background Noise Visualizer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body style="--bg-color: #212529; --bg-color-light: #2c3034; --text-color: #f8f9fa; --text-color-muted: #adb5bd; --border-color: #495057; --accent-color: #3498db;">
+    
+    <header>
+        <h1>Internet Background Noise Visualizer</h1>
+        <p>Visualizing unsolicited (REJECTED) connection attempts to decoy sensors in near real-time.</p>
+        
+        <button id="about-button" class="about-button">About</button>
+    </header>
+
+    <main>
+        <!-- Section 1: Map and Drill-Down Log -->
+        <section class="dashboard-container">
+            
+            <div id="map-container">
+                <div id="map"></div>
+            </div>
+            
+            <aside id="drilldown-log-container" class="log-column">
+                <h3 id="drilldown-title">Click a Cluster for Details</h3>
+                <div id="drilldown-log-feed" class="log-feed">
+                    <li>Click a cluster on the map to see individual IPs for that location.</li>
+                </div>
+            </aside>
+
+        </section>
+
+        <!-- Section 2: Flagged and Live Logs -->
+        <section class="logs-container">
+
+            <section id="flagged-log-container" class="log-column">
+                <h3>Flagged Events (Suspicious Hostnames/ISPs)</h3>
+                <div id="flagged-log-feed" class="log-feed">
+                    <li>Loading...</li>
+                </div>
+            </section>
+
+            <section id="live-log-container" class="log-column">
+                <h3>Live Event Log (All Rejections)</h3>
+                <div id="live-log-feed" class="log-feed">
+                    <li>Loading...</li>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <!-- Custom Context Menu (hidden by default) -->
+    <div id="custom-context-menu" class="context-menu">
+        <div class="context-menu-item" id="menu-flag-ip">Flag this IP as Suspicious</div>
+        <div class="context-menu-item" id="menu-check-kaspersky">Check IP on Kaspersky</div>
+    </div>
+
+    <!-- About Modal Structure (hidden by default) -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+    <div id="about-modal" class="modal-content">
+        <span class="modal-close" id="modal-close-button">&times;</span>
+        <h3>About This Project</h3>
+        <p>This dashboard visualizes global "internet background noise." It's powered by multiple decoy EC2 sensors (honeypots) intentionally deployed in different AWS regions.</p>
+        <p>These sensors are heavily firewalled to <strong>REJECT</strong> all traffic. AWS VPC Flow Logs are used to capture every blocked connection attempt, which this application then enriches with Geo-location, Hostname, and ISP data to plot in real-time.</p>
+        <p>More than anything, this is a portfolio project to demonstrate end-to-end cloud engineering and DevSecOps skills:</p>
+        <ul>
+            <li><strong>Infrastructure as Code:</strong> The entire multi-region AWS environment (VPCs, RDS, ECS, Load Balancers, IAM Roles, etc.) is built and managed with <strong>Terraform</strong>.</li>
+            <li><strong>CI/CD:</strong> The application is automatically built, scanned for vulnerabilities, and deployed using a secure <strong>GitLab CI/CD pipeline</strong> with OIDC authentication.</li>
+        </ul>
+        <p>See the complete IaC and application code on GitHub:</p>
+        <p><a href="[GitHub Link Here]" target="_blank">[GitHub Link Here]</a></p>
+    </div>
+
+
+    <!-- Leaflet Map Library JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     
+    <!-- Leaflet Marker Cluster Plugin JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
