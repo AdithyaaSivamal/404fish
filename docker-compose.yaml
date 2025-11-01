@@ -1,0 +1,33 @@
+# docker-compose.yml
+#
+# Remember to set the DB and Postgresql usernames and passwords
+
+version: '3.8'
+
+services:
+  app:
+    build: .  
+    ports:
+      - "8000:8000" 
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=noise_db
+      - DB_USER= CHANGE_ME_1
+      - DB_PASSWORD= CHANGE_ME_2
+    depends_on:
+      - db 
+
+  # The Local PostgreSQL Database
+  db:
+    image: postgres:16-alpine 
+    environment:
+      # These must match the 'app' environment variables
+      - POSTGRES_DB=noise_db
+      - POSTGRES_USER= CHANGE_ME_1
+      - POSTGRES_PASSWORD= CHANGE_ME_2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist data locally
+
+volumes:
+  postgres_data: 
