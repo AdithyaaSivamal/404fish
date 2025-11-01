@@ -1,0 +1,6 @@
+The application requires having access to the GeoLite2 database for geolocation services. Please ensure that you have the following GeoLite2 database files downloaded and placed in the project home directory:
+ - GeoLite2-City.mmdb
+ - GeoLite2-Country.mmdb) 
+
+You can download the GeoLite2 database from the MaxMind website: 
+https://dev.maxmind.com/geoip/geolite2-free-geolocation-data
