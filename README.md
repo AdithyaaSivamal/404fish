@@ -10,7 +10,8 @@
 
 ### 🖥️ Demo
 
-**[A GIF OR SCREENSHOT OF YOUR DASHBOARD UI WOULD BE PERFECT HERE]**
+<img width="2392" height="1314" alt="image" src="https://github.com/user-attachments/assets/459817a1-cfe2-4af5-bab6-b6c453cf3115" />
+
 
 -----
 
