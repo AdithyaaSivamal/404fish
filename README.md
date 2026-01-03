@@ -5,6 +5,12 @@
 > This repository contains the application code for the **Internet Background Noise Visualizer**, a multi-region, real-time threat intelligence dashboard.
 >
 > This application is a Python **FastAPI** backend with a vanilla **HTML/CSS/JavaScript** frontend.
+>
+
+
+**The full IaC (Terraform) and CI/CD pipeline for this project can be found in its companion repository:**
+
+**[https://github.com/AdithyaaSivamal/404fish-infra]**
 
 -----
 
